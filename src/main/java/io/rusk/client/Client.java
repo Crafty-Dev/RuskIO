@@ -11,7 +11,10 @@ import io.rusk.network.packet.Packet;
 import io.rusk.network.packet.PacketDecoder;
 import io.rusk.network.packet.PacketEncoder;
 
-public class Client {
+/**
+ * The Client
+ */
+public abstract class Client {
 
 
     public final String host;
@@ -25,6 +28,10 @@ public class Client {
     }
 
 
+    /**
+     * Connects the client to the server
+     * @throws RuntimeException When the client failed to connect
+     */
     public void connect() throws RuntimeException {
 
         EventLoopGroup group = NetworkManager.EPOLL ? new EpollEventLoopGroup() : new NioEventLoopGroup();
@@ -49,28 +56,52 @@ public class Client {
 
     }
 
+    /**
+     * Sets the instance of the Server connection
+     * @param server The server connection
+     */
     protected void registerServerConnection(ServerConnection server) {
         this.server = server;
     }
 
+    /**
+     * Clears the server connection
+     */
     protected void unregisterServerConnection() {
         this.server = null;
     }
 
+    /**
+     * Called when the client connected to the server
+     */
     public void onConnect() {
 
     }
 
+    /**
+     * Called when Client disconnects from the server
+     */
     public void onDisconnect() {
 
     }
 
+    /**
+     * Called when the client receives a packet from the server
+     * @param packet The received packet
+     */
     public void onPacketReceive(Packet packet) {
 
     }
 
+    /**
+     * Sends a packet to the server
+     * @param packet The packet
+     */
     public void send(Packet packet) {
         this.server.send(packet);
     }
 
+    public boolean isConnected(){
+        return this.server != null;
+    }
 }

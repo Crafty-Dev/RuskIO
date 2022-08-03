@@ -7,6 +7,9 @@ import io.rusk.network.NetworkManager;
 
 import java.util.List;
 
+/**
+ * A simple Decoder for packets
+ */
 public class PacketDecoder extends ByteToMessageDecoder {
 
 

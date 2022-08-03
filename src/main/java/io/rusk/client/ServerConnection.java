@@ -5,6 +5,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.rusk.network.packet.Packet;
 
+/**
+ * Represents the connection between the client and the server
+ */
 public class ServerConnection extends SimpleChannelInboundHandler<Packet> {
 
 
@@ -36,6 +39,10 @@ public class ServerConnection extends SimpleChannelInboundHandler<Packet> {
     }
 
 
+    /**
+     * Sends a packet to the server
+     * @param packet The packet
+     */
     protected void send(Packet packet) {
         this.channel.writeAndFlush(packet, this.channel.voidPromise());
     }

@@ -5,6 +5,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import io.rusk.network.NetworkManager;
 
+/**
+ * A simple Encoder for Packets
+ */
 public class PacketEncoder extends MessageToByteEncoder<Packet> {
 
 
