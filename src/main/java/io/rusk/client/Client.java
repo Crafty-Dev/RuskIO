@@ -49,6 +49,13 @@ public class Client {
 
     }
 
+    protected void registerServerConnection(ServerConnection server) {
+        this.server = server;
+    }
+
+    protected void unregisterServerConnection() {
+        this.server = null;
+    }
 
     public void onConnect() {
 

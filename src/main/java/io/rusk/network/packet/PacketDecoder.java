@@ -22,7 +22,7 @@ public class PacketDecoder extends ByteToMessageDecoder {
         packet.readData(in);
 
         if (in.readableBytes() > 0)
-            throw new IllegalStateException("Packet had an unexspected size");
+            throw new IllegalStateException("Packet had an unexpected size");
 
         out.add(packet);
 

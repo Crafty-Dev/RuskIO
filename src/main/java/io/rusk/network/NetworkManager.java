@@ -21,14 +21,14 @@ public class NetworkManager {
         return PACKET_REGISTRY.indexOf(packet.getClass());
     }
 
-    public static Packet getPacket(int packetId) {
+    public static Packet getPacket(int packetId) throws RuntimeException {
 
         Packet packet = null;
 
         try {
             packet = PACKET_REGISTRY.get(packetId).newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-
+            throw new RuntimeException("Failed to instantiate Packet; Maybe it does not have an empty constructor?");
         }
 
         return packet;

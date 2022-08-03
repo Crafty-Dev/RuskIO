@@ -17,15 +17,17 @@ public class ServerConnection extends SimpleChannelInboundHandler<Packet> {
     }
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        this.client.registerServerConnection(this);
         this.channel = ctx.channel();
         this.client.onConnect();
     }
 
     @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         this.client.onDisconnect();
         this.channel = null;
+        this.client.unregisterServerConnection();
     }
 
     @Override
@@ -35,6 +37,6 @@ public class ServerConnection extends SimpleChannelInboundHandler<Packet> {
 
 
     protected void send(Packet packet) {
-        this.channel.writeAndFlush(packet);
+        this.channel.writeAndFlush(packet, this.channel.voidPromise());
     }
 }
